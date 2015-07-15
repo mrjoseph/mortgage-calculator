@@ -25,7 +25,11 @@ app.get('/send',routes.getData);
 app.get('/details',routes.getDetails);
 
 
-app.listen(2000);
+//app.listen(2000);
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 console.log('Listening on server 2000');
 
