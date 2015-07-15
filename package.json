@@ -1,0 +1,32 @@
+{
+  "name": "zoopla",
+  "version": "1.0.0",
+  "description": "Mortgage calculator property finder app",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^3.4.7",
+    "request": "^2.48.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrjoseph/mortgage-calculator.git"
+  },
+  "keywords": [
+    "Zoopla",
+    "mortgage",
+    "calculator",
+    "property",
+    "finder"
+  ],
+  "author": "Trevor Joseph",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrjoseph/mortgage-calculator/issues"
+  },
+  "homepage": "https://github.com/mrjoseph/mortgage-calculator"
+}
