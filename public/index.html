@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Can I afford to get a mortgage?</title>
+
+
+
+  <!-- Custom styles for this template -->
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <!--script src="js/ie-emulation-modes-warning.js"></script -->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+      <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+
+      <!-- Bootstrap core CSS -->
+      <link href="css/bootstrap.css" rel="stylesheet">
+  <!--[if IE]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+      <![endif]-->
+      <style>
+      @media (min-width: 768px){
+
+      }
+      .results{
+        font-weight: bold;
+        font-size: 2em;
+      }
+
+      .row {
+        margin-bottom: 20px;
+      }
+
+
+      </style>
+      <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script -->
+      <script src="js/jquery-1.11.1.js"></script>
+      <script src="js/ie10-viewport-bug-workaround.js"></script>
+      <script src="js/underscore.js"></script>
+      <script src="js/backbone.js"></script>
+    </head>
+
+    <body>
+      <div class="ajax-loader">
+        <span class="searchMessage">
+          searching <span class="searchArea"></span>...
+        </span>
+      </div>
+      <div class="container">
+
+        <form class="" role="form" id="byToLetForm">
+          <h1 class="form-signin-heading text-center">Can I afford to get a mortgage?</h1>
+          <p class="text-center">Search for a property based on your affordability</p>
+          <div class="row">
+            <div class="col-md-2">
+              <label for="Property Value">Monthly income after tax and NI</label>
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control js-formatPrice" placeholder="" id="budget"  value="3000" autofocus>
+            </div>
+          </div>
+          <fieldset class="row js-isEmpty">
+            <legend>Where do you want to live?</legend>
+            <div class="col-md-2">
+              <label for="Property Value">Postcode</label>
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control" placeholder="" id="postcode"  value="" autofocus>
+            </div>
+            <div class="col-md-1">
+              <label for="Property Value">Area</label>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control js-isEmpty" placeholder="" id="area"  value="kent" autofocus>
+            </div>
+          </fieldset>
+
+          <fieldset class="row">
+            <legend>What's your price range?</legend>
+            <div class="col-md-2">
+              <label for="Property Value">Min price (&pound;)</label>
+            </div>
+            <div class="col-md-3">
+
+              <input type="text" class="form-control js-formatPrice" placeholder="Min price" id="minPrice"  value="200000" autofocus>
+            </div>
+            <div class="col-md-2">
+              <label for="Property Value">Max Price (&pound;)</label>
+            </div>
+            <div class="col-md-3">
+
+             <input type="text" class="form-control js-formatPrice" placeholder="Max price" id="maxPrice"  value="400000" autofocus>
+           </div>
+         </fieldset>
+
+         <fieldset class="row js-isEmpty">
+          <legend>What's your deposit?</legend>
+          <div class="col-md-2">
+            <label for="depositPercent">Deposit (LTV%)</label>
+          </div>
+          <div class="col-md-3">
+            <input type="number" class="form-control" placeholder="Deposit" id="depositPercent" value="20" autofocus>
+          </div>
+          <div class="col-md-2">
+            <label for="depositPounds">Deposit (£)</label>
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control js-formatPrice" placeholder="Deposit" id="depositPounds" value="" autofocus>
+          </div>
+        </fieldset>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label for="Deposit">Min bedrooms</label>
+          </div>
+          <div class="col-md-3">
+            <select name="minRoom" id="minRoom">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="Deposit">Max bedroom</label>
+          </div>
+          <div class="col-md-3">
+           <select name="maxRoom" id="maxRoom">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <label for="annualInterestRate">Annual interest rate</label>
+        </div>
+        <div class="col-md-3">
+
+          <input type="number" step="any" class="form-control col-md-3" placeholder="Annual interest rate" id="annualInterestRate" value="2.9" autofocus>
+        </div>
+
+        <div class="col-md-2">
+          <label for="mortgageTerm">Mortgage Term</label>
+        </div>
+        <div class="col-md-3">
+          <select name="mortgageTerm" id="mortgageTerm">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20" selected>20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+          </select> years
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class="col-md-4">
+          <button class="btn btn-lg btn-primary btn-block" id="calculate" type="submit">Can I afford it!</button>
+        </div>
+      </div>
+    </form>
+    <ul id="results-container">
+    </ul>
+    <div class="details-content"></div>
+  </div>
+</div> <!-- /container -->
+
+<script type="text/html" id="template">
+<% if(typeof _item != 'undefined' ||_item.length === 0 ) { %>
+
+  <% _.each(_item,function(elem,i){ %>
+
+    <div class="item col-md-4">
+    <div class="thumbnail">
+    <a class="" href="<%= elem.details_url %>">
+    <img src="<%= elem.image_url %>" />
+    </a><br>
+
+    <h3><%= elem.street_name %></h3>
+    <h4> Monthly Repayments: £<%= elem.repayments_deposit.repayments %></h4>
+
+    <% if(!isNaN(elem.repayments_deposit.budget)){ %>
+      <p><%= parseInt(elem.repayments_deposit.budget).toLocaleString() %>% of your monthly earnings will go towards your mortgage<p>
+      <% } %>
+
+
+      <h4> Deposit: £<%= parseInt(elem.repayments_deposit.depositPercent).toLocaleString() %></h4>
+      <h4>Property Value: &pound;<%= parseInt(elem.price,10).toLocaleString() %></h4>
+      <h4><%= elem.num_bedrooms %> bedroom <%= elem.property_type %></h4>
+
+      </div>
+      </div>
+
+      <% }); %>
+  <% } else { %>
+    <h3>No results</h3>
+    <% } %>
+    </script>
+
+    <script src="js/byToLetCalculate.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .form-group {
+        width:300px;
+    }
+    .remove{
+      display:inline-block;
+      border:1px solid #ccc;
+      border-radius: 3px;
+      padding:3px;
+      float:right;
+      cursor:pointer;
+    }
+    .status, .status-undo{
+      display:inline-block;
+      border:1px solid #ccc;
+      border-radius: 3px;
+      padding:3px;
+      float:right;
+      cursor:pointer;
+    }
+    #todoList-container li{
+      float:left;
+      width:100%;
+      padding:5px;
+    }
+     #todoList-container li div{
+      margin-right:30px;
+     }
+     .done .edit{
+      text-decoration:line-through;
+      color:#ccc;
+     }
+    </style>
+  </head>
+  <script src="js/jquery-1.8.0.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/underscore.js"></script>
+  <script src="js/backbone.js"></script>
+
+  <body>
+<div class="container">
+    <h1>Zoopla api call</h1>
+
+
+</div>
+
+
+    <script type="text/html" id="template">
+        <% _.each(_item, function(data,i) { %>
+      <li data-itemnumber="<%= i %>">
+        <span class="remove" >x</span>
+        <% if (data.status === "true") { %>
+          <span class="status" >done</span>
+        <% } else { %>
+        <span class="status-undo" >undo</span>
+        <% } %>
+        <div contenteditable="true" class="edit"> <%= data.item %></div>
+      </li>
+     <% }); %>
+
+    </script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+  </body>
+</html>
