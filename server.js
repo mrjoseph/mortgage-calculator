@@ -14,13 +14,23 @@ app.configure(function () {
   app.use(express.static(__dirname + '/public'));
 
 });
+
+//New angular app
+app.get('/angular-app', function(req, res) {
+    fs.readFile(__dirname + '/public/index2.html', 'utf8', function(err, text){
+        res.send(text);
+    });
+});
+
+// Old Backbone app
 app.get('/', function(req, res) {
     fs.readFile(__dirname + '/public/index.html', 'utf8', function(err, text){
         res.send(text);
     });
 });
 
-app.get('/send',routes.getData);
+//Ajax end points
+app.post('/send',routes.getData);
 
 app.get('/details',routes.getDetails);
 

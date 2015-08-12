@@ -25,12 +25,14 @@ var Utils = function(){};
         }
     };
 
+    //Loop over all the fields that need to be formatted.
     if(arr){
         for(i=0;i<arr.length;i++){
             _formatField($(arr[i]));
         }
     }
 
+    //Make sure the user doesn't put in letters where you actually want numbers
     $priceField.on('keydown',function(e){
     // Allow only backspace and delete and tab
     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||

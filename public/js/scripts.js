@@ -59,7 +59,7 @@
            // console.log(result._item);
             //Grab our template from the html and pass it our result
             var template = _.template( $("#template").html(), result );
-            console.log(result);
+            //console.log(result);
             //append our template to our views container
             this.$el.find('#results-container').html( template );
 
@@ -143,6 +143,7 @@
             };
             if(submit){
                 this.ajax('/send','JSON','GET',obj,'buildApp');
+                console.log(obj);
             } else {
                 console.log('error on form');
             }
