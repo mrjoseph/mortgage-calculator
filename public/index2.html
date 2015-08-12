@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="zooplaApp" class="ng-cloak">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Can I afford to get a mortgage?</title>
+
+
+
+  <!-- Custom styles for this template -->
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <!--script src="js/ie-emulation-modes-warning.js"></script -->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+      <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+
+      <!-- Bootstrap core CSS -->
+      <link href="css/bootstrap.css" rel="stylesheet">
+  <!--[if IE]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+      <![endif]-->
+      <style>
+      @media (min-width: 768px){
+
+      }
+      .results{
+        font-weight: bold;
+        font-size: 2em;
+      }
+
+      .row {
+        margin-bottom: 20px;
+      }
+
+
+      </style>
+      
+      
+      
+    </head>
+
+    <body>
+      <div class="ajax-loader">
+        <span class="searchMessage">
+          searching <span class="searchArea"></span>...
+        </span>
+      </div>
+      <div class="container">
+        <h1 class="form-signin-heading text-center">Can I afford to get a mortgage?</h1>
+        <form class="" role="form" id="byToLetForm" ng-submit="submit()" ng-controller="zooplaFormSubmitCtrl">
+          
+          <p class="text-center">Search for a property based on your affordability</p>
+          <div class="row">
+            <div class="col-md-2">
+              <label for="Property Value">Monthly income after tax and NI</label>
+            </div>
+            <div class="col-md-3">
+              <input 
+                ng-model="formData.budget" 
+                type="text" 
+                class="form-control js-formatPrice" 
+                placeholder="Pfft!... I'm loaded!" 
+                id="budget"  
+                value="{{formData.budget}}" 
+                autofocus 
+                ng-blur="format($event)"
+                ng-keydown="onlyNumber($event)"
+                required
+                ng-init="formData.budget='2000'"
+                >
+            </div>
+          </div>
+          <fieldset class="row js-isEmpty">
+            <legend>Where do you want to live?</legend>
+            <div class="col-md-2">
+              <label for="Property Value">Postcode</label>
+            </div>
+            <div class="col-md-3">
+              <input 
+                ng-model="formData.postcode" 
+                type="text" 
+                class="form-control" 
+                placeholder="SW1" 
+                id="postcode"  
+                value=""
+                ng-keyup="disabledFieldChecker($event)" 
+                autofocus
+                ng-init="formData.postcode='nw2'"
+                >
+            </div>
+            <div class="col-md-1">
+              <label for="Property Value">Area</label>
+            </div>
+            <div class="col-md-4">
+              <input 
+                ng-model="formData.area" 
+                type="text" 
+                class="form-control js-isEmpty" 
+                placeholder="Wembley" 
+                id="area"  
+                value=""
+                ng-keyup="disabledFieldChecker($event)" 
+                autofocus
+              >
+            </div>
+          </fieldset>
+
+          <fieldset class="row">
+            <legend>What's your price range?</legend>
+            <div class="col-md-2">
+              <label for="Property Value">Min price (&pound;)</label>
+            </div>
+            <div class="col-md-3">
+
+              <input 
+                ng-model="formData.minPrice" 
+                value="{{formData.minPrice}}" 
+                ng-blur="format($event)"
+                type="text" 
+                class="form-control js-formatPrice" 
+                placeholder="Min price" 
+                id="minPrice"
+                ng-keydown="onlyNumber($event)" 
+                autofocus
+                ng-init="formData.minPrice='200000'"
+              >
+            </div>
+            <div class="col-md-2">
+              <label for="Property Value">Max Price (&pound;)</label>
+            </div>
+            <div class="col-md-3">
+
+             <input 
+              ng-model="formData.maxPrice" 
+              value="{{formData.maxPrice}}" 
+              ng-blur="format($event)" 
+              type="text" 
+              class="form-control js-formatPrice" 
+              placeholder="Max price" 
+              id="maxPrice"
+              ng-keydown="onlyNumber($event)" 
+              autofocus
+              ng-init="formData.maxPrice='600000'"
+              >
+           </div>
+         </fieldset>
+
+         <fieldset class="row js-isEmpty">
+          <legend>What's your deposit?</legend>
+          <div class="col-md-2">
+            <label for="depositPercent">Deposit (LTV%)</label>
+          </div>
+          <div class="col-md-3">
+            <input 
+              ng-model="formData.depositPercent"
+              ng-keyup="disabledFieldChecker($event)" 
+              type="text" 
+              class="form-control" 
+              placeholder="Deposit" 
+              id="depositPercent" 
+              value=""
+              ng-keydown="onlyNumber($event)"  
+              autofocus
+              ng-init="formData.depositPercent='20'"
+            >
+          </div>
+          <div class="col-md-2">
+            <label for="depositPounds">Deposit (£)</label>
+          </div>
+          <div class="col-md-3">
+            <input 
+              ng-model="formData.depositPounds"
+              ng-keyup="disabledFieldChecker($event)" 
+              value="{{formData.depositPounds}}" 
+              ng-blur="format($event)" 
+              type="text" 
+              class="form-control js-formatPrice" 
+              placeholder="Deposit" 
+              id="depositPounds" 
+              value=""
+              ng-keydown="onlyNumber($event)" 
+              autofocus
+            >
+          </div>
+        </fieldset>
+
+        <div class="row">
+          <div class="col-md-2">
+            <label for="minRoom">Min bedrooms</label>
+          </div>
+          <div class="col-md-3" >
+            <select 
+              ng-model="formData.minRoom" 
+              name="minRoom" 
+              id="minRoom"
+              ng-options="o as o for o in numberList(1,10)"
+              ng-init="formData.minRoom='1'"
+              >
+              </select>  
+             
+            
+
+          </div>
+          <div class="col-md-2">
+            <label for="maxRoom">Max bedroom</label>
+          </div>
+          <div class="col-md-3">
+          <!-- Build a option list from an array -->           
+            <select
+              name="maxRoom" 
+              id="maxRoom"
+              ng-model="formData.maxRoom"
+              ng-options="o as o for o in numberList(1,10)"
+              ng-init="formData.maxRoom='1'"
+              >
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <label for="annualInterestRate">Annual interest rate</label>
+        </div>
+        <div class="col-md-3">
+
+          <input ng-model="formData.annualInterestRate" type="number" step="any" class="form-control col-md-3" placeholder="Annual interest rate" id="annualInterestRate" value="20"  
+          ng-init="formData.annualInterestRate='2'" autofocus>
+        </div>
+
+        <div class="col-md-2">
+          <label for="mortgageTerm">Mortgage Term</label>
+        </div>
+        <div class="col-md-3">
+            <select
+              name="mortgageTerm" 
+              id="mortgageTerm"
+              ng-model="formData.mortgageTerm"
+              ng-options="o as o for o in numberList(1,25)"
+              ng-init="formData.mortgageTerm='20'"
+              >
+          </select>years
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class="col-md-4">
+          <input class="btn btn-lg btn-primary btn-block" id="calculate" type="submit" value="can I afford it"/>
+        </div>
+      </div>
+    </form>
+    
+    <div id="results-container" ng-controller="resultsContainer">
+      <div class="item col-md-12" ng-repeat="item in ajaxData.listing">
+        <div class="">
+          <a href="{{item.details_url}}"> 
+          <img src="{{item.image_url}}" alt="">
+          </a>  
+        </div>
+        <h3>{{item.num_bedrooms}} bedroom {{item.property_type}}, {{item.street_name}}</h3>
+        <p>Price: £{{item.price | toLocaleString }}</p>
+         <p> Deposit: £{{item.repayments_deposit.depositPercent | toLocaleString }}</p>
+        <p>{{item.repayments_deposit.budget | round }}% of monthly income</p>
+        <p>Monthly replayments: £{{item.repayments_deposit.repayments | toLocaleString}}</p>
+        
+      </div>
+    <div class="details-content"></div>
+  </div>
+</div> <!-- /container -->
+
+
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angularApp.js"></script>
+    <script src="/js/byToLetCalculate.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/masonry.pkgd.min.js"></script>
+    <script src="/js/imagesloaded.pkgd.min.js"></script>
+    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script -->
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+    </body>
+    </html>
